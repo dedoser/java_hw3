@@ -6,8 +6,10 @@ public interface File {
             System.out.print("\t");
         }
         int lastSlash = getName().lastIndexOf('\\');
-        System.out.println(getName().substring(lastSlash + 1));
+        System.out.println(getName().substring(lastSlash + 1) + "---" + getSize());
     }
 
     String getName();
+
+    Long getSize();
 }

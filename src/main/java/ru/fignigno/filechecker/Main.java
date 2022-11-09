@@ -12,7 +12,8 @@ public class Main {
     private static final int THREAD_SIZE = 8;
 
     public static void main(String[] args) {
-        ThreadPoolExecutor threadPoolExecutor = (ThreadPoolExecutor) Executors.newFixedThreadPool(THREAD_SIZE);;
+        ThreadPoolExecutor threadPoolExecutor = (ThreadPoolExecutor) Executors.newFixedThreadPool(THREAD_SIZE);
+        System.out.print("Enter the dir: ");
         try (Scanner scanner = new Scanner(System.in)) {
             String startPath = scanner.nextLine();
             FileCheckerService fileCheckerService = new FileCheckerService(startPath, threadPoolExecutor);

@@ -6,6 +6,7 @@ import java.util.List;
 
 public class Directory implements File {
     private final String name;
+    private Long size;
     private final List<File> files;
 
     public Directory(String name) {
@@ -22,6 +23,14 @@ public class Directory implements File {
     @Override
     public String getName() {
         return name;
+    }
+
+    @Override
+    public Long getSize() {
+        if (size == null) {
+            size = files.stream().mapToLong(File::getSize).sum();
+        }
+        return size;
     }
 
     public void addFiles(Collection<? extends File> newFiles) {

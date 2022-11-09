@@ -29,7 +29,7 @@ public class FileCheckerService {
             if (!queue.isEmpty()) {
                 result = threadPoolExecutor.submit(new FileChecker(queue.poll()));
             } else {
-                if (result.isDone() && queue.isEmpty()) {
+                if (result.isDone() && queue.isEmpty() && threadPoolExecutor.getActiveCount() == 0) {
                     break;
                 }
             }
@@ -61,7 +61,7 @@ public class FileCheckerService {
                 return Result.STOP;
             }
             List<Directory> dirs = files.stream().filter(File::isDirectory).map(dir -> new Directory(dir.getPath())).toList();
-            List<SimpleFile> onlyFiles = files.stream().filter(File::isFile).map(file -> new SimpleFile(file.getName())).toList();
+            List<SimpleFile> onlyFiles = files.stream().filter(File::isFile).map(file -> new SimpleFile(file.getName(), file.length())).toList();
 
             directory.addFiles(onlyFiles);
             directory.addFiles(dirs);
